@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OAuth Callback</title>
+</head>
+<body>
+    <h1>OAuth Callback</h1>
+    <script>
+        // Function to get query parameters from the URL
+        function getQueryParams() {
+            const params = {};
+            const queryString = window.location.search.substring(1);
+            const regex = /([^&=]+)=([^&]*)/g;
+            let m;
+            while (m = regex.exec(queryString)) {
+                params[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
+            }
+            return params;
+        }
+
+        // Handle the OAuth response
+        const params = getQueryParams();
+        if (params.access_token) {
+            // Successful response
+            console.log('Access Token:', params.access_token);
+            // You can store the token or proceed with your application logic
+        } else {
+            // Handle errors or missing tokens
+            console.error('OAuth error:', params.error);
+        }
+    </script>
+</body>
+</html>
